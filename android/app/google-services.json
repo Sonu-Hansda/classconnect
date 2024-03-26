@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661641114119",
+    "project_id": "class-connect-bfa3a",
+    "storage_bucket": "class-connect-bfa3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661641114119:android:3ef5c5f9d07986a82530a2",
+        "android_client_info": {
+          "package_name": "com.neuralcompute.classconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP4SsjAg8wArFwknuKjLJdayOHUYc8pAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
