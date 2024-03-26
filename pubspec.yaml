@@ -9,9 +9,14 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.6
+  equatable:
+  firebase_auth: null
+  firebase_core: null
   flutter:
     sdk: flutter
-  google_fonts:
+  flutter_bloc: null
+  get_it: null
+  google_fonts: null
 
 dev_dependencies:
   flutter_lints: ^3.0.0
