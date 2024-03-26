@@ -1,5 +1,5 @@
-import 'package:classconnect/screens/sign_in.dart';
-import 'package:classconnect/screens/sign_up.dart';
+import 'package:classconnect/views/sign_in/sign_in.dart';
+import 'package:classconnect/views/sign_up/sign_up.dart';
 import 'package:classconnect/widgets/custom_button.dart';
 import 'package:classconnect/widgets/slide_left.dart';
 import 'package:flutter/material.dart';

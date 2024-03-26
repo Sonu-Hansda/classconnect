@@ -1,4 +1,6 @@
-import 'package:classconnect/screens/sign_in.dart';
+import 'dart:developer';
+
+import 'package:classconnect/views/sign_in/sign_in.dart';
 import 'package:classconnect/widgets/custom_button.dart';
 import 'package:classconnect/widgets/custom_text_fields.dart';
 import 'package:classconnect/widgets/slide_left.dart';
@@ -16,8 +18,23 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _fname = TextEditingController();
 
   final TextEditingController _lname = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
 
-  bool showPassword = true;
+  bool showPassword = false;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _fname.dispose();
+    _lname.dispose();
+    _email.dispose();
+    _password.dispose();
+    _confirmPassword.dispose();
+    _formKey.currentState?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +52,20 @@ class _SignUpState extends State<SignUp> {
             ),
             const SizedBox(height: 24.0),
             Form(
+              key: _formKey,
               child: Column(
                 children: [
                   customTextForm(
                       controller: _fname,
                       hintText: 'First Name',
+                      validate: (val) {
+                        if (val!.isEmpty) {
+                          return 'Required';
+                        } else if (val.length <= 1) {
+                          return 'Too short';
+                        }
+                        return null;
+                      },
                       preIcon: const Icon(Icons.person)),
                   const SizedBox(height: 12.0),
                   customTextForm(
@@ -48,13 +74,29 @@ class _SignUpState extends State<SignUp> {
                       preIcon: const Icon(Icons.person_2_outlined)),
                   const SizedBox(height: 12.0),
                   customTextForm(
-                      controller: _lname,
+                      controller: _email,
+                      validate: (val) {
+                        if (val!.isEmpty) {
+                          return 'Required';
+                        } else if (!val.contains('@')) {
+                          return 'Invalid email';
+                        } else if (!val.endsWith('nitjsr.ac.in')) {
+                          return 'only collge email is allowed';
+                        }
+                        return null;
+                      },
                       hintText: 'Email Address',
                       preIcon: const Icon(Icons.email_outlined)),
                   const SizedBox(height: 12.0),
                   customTextForm(
                       isPassword: !showPassword,
-                      controller: _lname,
+                      controller: _password,
+                      validate: (val) {
+                        if (val!.isEmpty) {
+                          return 'Atleast 6 characters long.';
+                        }
+                        return null;
+                      },
                       hintText: 'Password',
                       postIcon: IconButton(
                           onPressed: () {
@@ -68,8 +110,15 @@ class _SignUpState extends State<SignUp> {
                       preIcon: const Icon(Icons.password_outlined)),
                   const SizedBox(height: 12.0),
                   customTextForm(
-                      controller: _lname,
+                      controller: _confirmPassword,
                       hintText: 'Confirm Password',
+                      isPassword: true,
+                      validate: (val) {
+                        if (_password.text != _confirmPassword.text) {
+                          return 'Password not match';
+                        }
+                        return null;
+                      },
                       preIcon: const Icon(Icons.password_outlined)),
                   const SizedBox(height: 12.0),
                   const Text.rich(
@@ -87,10 +136,14 @@ class _SignUpState extends State<SignUp> {
                     ),
                   ),
                   const SizedBox(height: 16.0),
-                  const CustomButton(
+                  CustomButton(
                     text: 'Create now',
-                    backgroundColor: Color(0xFF7CFCAF),
-                    ontap: null,
+                    backgroundColor: const Color(0xFF7CFCAF),
+                    ontap: () {
+                      if (_formKey.currentState!.validate()) {
+                        log("Fine");
+                      }
+                    },
                   ),
                   const SizedBox(height: 16.0),
                   Text.rich(
