@@ -19,4 +19,18 @@ class SignInError extends SignInState {
 
 class SignInSuccess extends SignInState {}
 
+class SignInNotVerified extends SignInState {}
+
+class SignInEmailSending extends SignInState {}
+
+class SignInEmailSent extends SignInState {}
+
+class SignInEmailSentFailed extends SignInState {
+  final String message;
+  const SignInEmailSentFailed(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
 class SignInLoading extends SignInState {}

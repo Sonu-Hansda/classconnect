@@ -16,7 +16,25 @@ class SignInCubit extends Cubit<SignInState> {
     if (response.status == ResponseType.success) {
       emit(SignInSuccess());
     } else {
-      emit(SignInError(response.message ?? "An unknown error occurred."));
+      if (response.message == 'email-not-verified') {
+        emit(SignInNotVerified());
+      } else if (response.message == 'user-not-found') {
+        emit(const SignInError('No user found with this email'));
+      } else {
+        emit(SignInError(response.message ?? "An unknown error occurred."));
+      }
+    }
+  }
+
+  Future<void> verifyEmail(String email, String password) async {
+    emit(SignInEmailSending());
+    Response res = await _authService.sendVerificationMail(email, password);
+    if (res.status == ResponseType.success) {
+      emit(SignInEmailSent());
+    } else {
+      emit(SignInEmailSentFailed(res.message == 'user-not-found'
+          ? 'User not found with provided email'
+          : 'Failed to send verification mail.'));
     }
   }
 }
