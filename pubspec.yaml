@@ -8,8 +8,9 @@ environment:
   sdk: ">=3.3.2 <4.0.0"
 
 dependencies:
+  cloud_firestore: null
   cupertino_icons: ^1.0.6
-  equatable:
+  equatable: null
   firebase_auth: null
   firebase_core: null
   flutter:
@@ -17,6 +18,7 @@ dependencies:
   flutter_bloc: null
   get_it: null
   google_fonts: null
+  lottie: null
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -28,6 +30,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/image.png
+    - assets/animations/email_sent.json
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
