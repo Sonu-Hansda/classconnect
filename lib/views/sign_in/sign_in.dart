@@ -40,8 +40,11 @@ class _SignInState extends State<SignIn> {
           ScaffoldMessenger.of(context).showSnackBar(
               customSnackBar(content: state.message, type: MessageType.error));
         } else if (state is SignInSuccess) {
-          Navigator.pushReplacement(
-              context, SlideLeftRoute(page: const HomePage()));
+          Navigator.pushAndRemoveUntil(
+            context,
+            SlideLeftRoute(page: const HomePage()),
+            (route) => false,
+          );
         } else if (state is SignInNotVerified) {
           customDialog(context);
         } else if (state is SignInEmailSent) {
